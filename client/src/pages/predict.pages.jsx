@@ -1,20 +1,13 @@
 import React from "react";
-import { Layout, Menu, Breadcrumb } from "antd";
-import {
-    Form,
-    Input,
-    Button,
-    Checkbox,
-    Space,
-    Select,
-    Row,
-    Col,
-    InputNumber,
-} from "antd";
+import { Layout } from "antd";
+import "../styles/predict.scss";
+import { Form, Button, Select, Row, Col, InputNumber } from "antd";
+import data from "../assets/data.json";
 const required = {
     required: true,
     message: "Please provide input!",
 };
+
 const Predict = () => {
     const onFinish = (values) => {
         console.log("Success:", values);
@@ -26,16 +19,14 @@ const Predict = () => {
     return (
         <Layout className='site-layout'>
             <Form
+                className='form'
                 name='basic'
                 labelCol={{ span: 23 }}
                 wrapperCol={{ span: 23 }}
                 initialValues={{ remember: true }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}>
-                {/* <Space direction='vertical' size={"small"}> */}
                 <Row>
-                    {/* <Space direction='vertical' size={"small"}> */}
-
                     <Col xs={24} md={12} lg={8} className='px-5'>
                         <Form.Item
                             label='Country'
@@ -43,13 +34,11 @@ const Predict = () => {
                             rules={[required]}
                             hasFeedback>
                             <Select>
-                                <Select.Option value='demo'>Demo</Select.Option>
-                                <Select.Option value='demo1'>
-                                    Demo1
-                                </Select.Option>
-                                <Select.Option value='demo2'>
-                                    Demo2
-                                </Select.Option>
+                                {data.country.map((val) => (
+                                    <Select.Option value={val}>
+                                        {val}
+                                    </Select.Option>
+                                ))}
                             </Select>
                         </Form.Item>
                     </Col>
@@ -60,13 +49,11 @@ const Predict = () => {
                             rules={[required]}
                             hasFeedback>
                             <Select>
-                                <Select.Option value='demo'>Demo</Select.Option>
-                                <Select.Option value='demo1'>
-                                    Demo1
-                                </Select.Option>
-                                <Select.Option value='demo2'>
-                                    Demo2
-                                </Select.Option>
+                                {data.degree.map((val) => (
+                                    <Select.Option value={val}>
+                                        {val}
+                                    </Select.Option>
+                                ))}
                             </Select>
                         </Form.Item>
                     </Col>
@@ -77,13 +64,11 @@ const Predict = () => {
                             rules={[required]}
                             hasFeedback>
                             <Select>
-                                <Select.Option value='demo'>Demo</Select.Option>
-                                <Select.Option value='demo1'>
-                                    Demo1
-                                </Select.Option>
-                                <Select.Option value='demo2'>
-                                    Demo2
-                                </Select.Option>
+                                {data.employment.map((val) => (
+                                    <Select.Option value={val}>
+                                        {val}
+                                    </Select.Option>
+                                ))}
                             </Select>
                         </Form.Item>
                     </Col>
@@ -94,13 +79,11 @@ const Predict = () => {
                             rules={[required]}
                             hasFeedback>
                             <Select>
-                                <Select.Option value='demo'>Demo</Select.Option>
-                                <Select.Option value='demo1'>
-                                    Demo1
-                                </Select.Option>
-                                <Select.Option value='demo2'>
-                                    Demo2
-                                </Select.Option>
+                                {data.ug.map((val) => (
+                                    <Select.Option value={val}>
+                                        {val}
+                                    </Select.Option>
+                                ))}
                             </Select>
                         </Form.Item>
                     </Col>
@@ -130,7 +113,6 @@ const Predict = () => {
                         </Button>
                     </Form.Item>
                 </Row>
-                {/* </Space> */}
             </Form>
         </Layout>
     );
