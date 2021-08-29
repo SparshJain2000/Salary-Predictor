@@ -1,0 +1,6 @@
+.form {
+    margin: 5vh 10vw 5vh 10vw;
+    @media only screen and (max-width: 600px) {
+        margin: 2rem;
+    }
+}
