@@ -1,15 +1,21 @@
-import "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import SideBar from "./components/sidebar.component.jsx";
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout } from "antd";
 import Predict from "./pages/predict.pages";
+import Overview from "./pages/overview.pages";
 function App() {
     return (
-        <div className='App'>
+        <BrowserRouter>
             <Layout>
                 <SideBar />
-                <Predict />
+                <main>
+                    <Switch>
+                        <Route path='/' exact component={Predict} />
+                        <Route path='/overview' exact component={Overview} />
+                    </Switch>
+                </main>
             </Layout>
-        </div>
+        </BrowserRouter>
     );
 }
 
