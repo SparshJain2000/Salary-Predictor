@@ -1,16 +1,19 @@
 import os
 import pickle
 from flask import Flask, send_from_directory, request, json
+app = Flask(__name__)
 from flask_restful import Api, Resource
 from datetime import datetime
 from werkzeug.utils import secure_filename
 from os import environ
 import numpy as np
 import pandas as pd
-
+from flask_cors import CORS, cross_origin
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 RUN_HOST = environ.get('RUN_HOST')
 
-app = Flask(__name__)
+
 api = Api(app)
 app.config['DEBUG'] = True
 with open('./models/encoders.pkl','rb') as file:
@@ -59,14 +62,17 @@ class Predict(Resource):
         except:
             return {"error": "Server Error"}, 500
 class Data(Resource):
-    def get(self):
-        df=pd.read_csv("./dataset/final_dataset.csv")
-        json_data = request.get_json(force=True)
-        param = json_data.get('param')
-        value = json_data.get('value')
-        print(param,value)
-        df=df[df[param]==value]
-        return {"data":df.to_json(orient='records')},200
+    
+    def post(self):
+        try:
+            df=pd.read_csv("./dataset/final_dataset.csv")
+            json_data = request.get_json(force=True)
+            param = json_data.get('param')
+            data=df.groupby(param)["Salary"].mean();
+            return {"data":data.to_json(orient='index')},200
+        except Exception as e:
+            print(e)
+            return {"error": str(e)}, 500
 
 api.add_resource(HelloWorld, "/")
 api.add_resource(Predict, "/api/predict")
