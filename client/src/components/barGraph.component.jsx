@@ -2,12 +2,11 @@ import React from "react";
 import { Column, Pie } from "@ant-design/charts";
 import { Empty } from "antd";
 import { Spin, Space } from "antd";
-const BarGraph = ({ data, loading }) => {
-    console.log(data);
+const BarGraph = ({ data, loading, x, y }) => {
     var config = {
         data: data,
-        xField: "country",
-        yField: "value",
+        xField: x,
+        yField: y,
         xAxis: {
             label: {
                 autoHide: true,
@@ -15,7 +14,7 @@ const BarGraph = ({ data, loading }) => {
             },
         },
         meta: {
-            country: { alias: "COUNTRY" },
+            country: { alias: x },
             value: { alias: "Salary", formatter: (v) => `$${v}K` },
         },
         scrollbar: { type: "horizontal" },

@@ -1,25 +1,15 @@
-import { Layout, Menu, Breadcrumb } from "antd";
-import {
-    DesktopOutlined,
-    PieChartOutlined,
-    FileOutlined,
-    TeamOutlined,
-    LineChartOutlined,
-    UserOutlined,
-} from "@ant-design/icons";
+import { Layout, Menu } from "antd";
+import { PieChartOutlined, LineChartOutlined } from "@ant-design/icons";
 import { useLocation } from "react-router-dom";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
-const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+const { Sider } = Layout;
 
 const SideBar = () => {
     const [collapsed, setcollapsed] = useState(false);
     let location = useLocation();
-    const onCollapse = (collapsed) => {
-        console.log(collapsed);
-        setcollapsed(collapsed);
-    };
+    const onCollapse = (collapsed) => setcollapsed(collapsed);
+
     return (
         <Sider
             collapsible
