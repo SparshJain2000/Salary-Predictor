@@ -1,38 +1,30 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import BarGraph from "../components/barGraph.component";
+import ExpData from "../components/experienceData.component";
+import CountryData from "../components/countryData.component";
+import EmpData from "../components/empData.component";
+import { Tabs } from "antd";
+import DegData from "../components/degData.component";
+
+const { TabPane } = Tabs;
 
 const Overview = () => {
-    const [data, setdata] = useState([]);
-    const [loading, setloading] = useState(false);
-    const fetchData = async () => {
-        setloading(true);
-        try {
-            let { data } = await axios.post("http://localhost:5000/api/data", {
-                param: "Country",
-            });
-            const data_json = JSON.parse(data.data);
-            let df = [];
-            Object.entries(data_json).map((item) =>
-                df.push({
-                    country: item[0],
-                    value: Number((item[1] / 100).toFixed(2)),
-                }),
-            );
-            setdata(df);
-        } catch (e) {
-            alert(e.message);
-        }
-        setloading(false);
-    };
-    useEffect(() => {
-        fetchData();
-    }, []);
     return (
-        <div className='p-1rem'>
-            <h2>Mean salary by country</h2>
-            <BarGraph data={data} loading={loading} />
-        </div>
+        <>
+            <h2 className='text-align-center'>Mean Salary based on</h2>
+            <Tabs defaultActiveKey='1' centered page={3} className='px-5'>
+                <TabPane tab='Country' key='1'>
+                    <CountryData />
+                </TabPane>
+                <TabPane tab='Employment' key='2'>
+                    <EmpData />
+                </TabPane>
+                <TabPane tab='Degree' key='3'>
+                    <DegData />
+                </TabPane>
+                <TabPane tab='Experience' key='4'>
+                    <ExpData />
+                </TabPane>
+            </Tabs>
+        </>
     );
 };
 
