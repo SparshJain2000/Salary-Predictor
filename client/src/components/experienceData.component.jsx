@@ -34,7 +34,6 @@ const ExpData = () => {
     return (
         <div>
             <div className='p-1rem'>
-                <h2 className='text-align-center'>Mean salary by experience</h2>
                 <LineGraph
                     data={data}
                     loading={loading}
